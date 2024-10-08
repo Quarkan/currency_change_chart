@@ -1,15 +1,18 @@
-import requests as rq
-from bs4 import BeautifulSoup as BS
 import time
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-import numpy as np
-from matplotlib.ticker import FixedFormatter,LinearLocator,MultipleLocator,FormatStrFormatter
-import pandas as pd
 import tkinter as tk
 
-#rq.get('https://google.com', verify=False)
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import requests as rq
+from bs4 import BeautifulSoup as BS
+from matplotlib.ticker import FixedFormatter, LinearLocator, MultipleLocator
+
+rq.get('https://google.com', verify=False)
+
 user_text = int(input("Enter please interval in second: ")) #пользовательские настройки
+
+
 
 #запрос api
 def make_api_request():
@@ -140,9 +143,20 @@ def make_api_request():
     #вызвать окно tkinter
     root.mainloop()
 
-while True:
+user = True
+while user:
 
-    make_api_request()
-
+    print('>>Close windows for quit from program<<')
+    make_api_request() # получение api
     time.sleep(user_text)  # Пауза-интервал
-    print('>>Close windows for update base date<<')
+
+    user_data = str(input('Enter please stop if want closed program\n'
+                          'Press enter if want continue: ')).lower() #программа завершения работы с графиком
+    #условие завершения программы
+    if user_data == 'stop':
+        user = False
+    else:
+        user = True
+
+
+
